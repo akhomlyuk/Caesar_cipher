@@ -9,9 +9,9 @@ user_choice = input(
 if user_choice == 'D' or user_choice == 'd':
     ciphered_string = input(Fore.CYAN + 'Text for decryption: ')
     n = int(input(Fore.CYAN + 'Shift(any positive or negative integer): '))
-    print(f'{Fore.BLUE}Decrypted text: {Fore.GREEN}{decrypt(ciphered_string, n)}')
+    print(f'{Fore.BLUE}Decrypted text: {Fore.GREEN}{decrypt(ciphered_string, n)[0]}')
     with open('decrypted.txt', 'w', encoding='UTF-8') as file:
-        file.writelines(decrypt(ciphered_string, n))
+        file.writelines(decrypt(ciphered_string, n)[0])
     print(f'Text saved to: decrypted.txt')
 elif user_choice == 'E' or user_choice == 'e':
     string_for_encrypt = input(Fore.CYAN + 'Text for encryption: ')
@@ -22,9 +22,17 @@ elif user_choice == 'E' or user_choice == 'e':
     print(f'Text saved to: encrypted.txt')
 elif user_choice == 'B' or user_choice == 'b':
     ciphered_string = input(Fore.CYAN + 'Text for decryption: ')
-    for i in range(1, 27):
-        ls = ['ROT key ' + str(i) + ': ' + decrypt(ciphered_string, i) + '\n' for i in range(1, 26)]
-        with open('bruted.txt', 'w', encoding='UTF-8') as file:
-            file.writelines(ls)
-        print(f'{Fore.CYAN}ROT key {Fore.GREEN}{i}: {Style.RESET_ALL}{Style.BRIGHT}{decrypt(ciphered_string, i)}')
-    print(f'Text saved to: bruted.txt')
+    if decrypt(ciphered_string, 1)[1] > decrypt(ciphered_string, 1)[2]:
+        for i in range(1, 33):
+            ls = ['ROT key ' + str(i) + ': ' + decrypt(ciphered_string, i)[0] + '\n' for i in range(1, 33)]
+            with open('bruted.txt', 'w', encoding='UTF-8') as file:
+                file.writelines(ls)
+            print(f'{Fore.CYAN}ROT key {Fore.GREEN}{i}: {Style.RESET_ALL}{Style.BRIGHT}{decrypt(ciphered_string, i)[0]}')
+        print(f'Text saved to: bruted.txt')
+    else:
+        for i in range(1, 27):
+            ls = ['ROT key ' + str(i) + ': ' + decrypt(ciphered_string, i)[0] + '\n' for i in range(1, 27)]
+            with open('bruted.txt', 'w', encoding='UTF-8') as file:
+                file.writelines(ls)
+            print(f'{Fore.CYAN}ROT key {Fore.GREEN}{i}: {Style.RESET_ALL}{Style.BRIGHT}{decrypt(ciphered_string, i)[0]}')
+        print(f'Text saved to: bruted.txt')
