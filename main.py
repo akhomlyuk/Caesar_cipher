@@ -37,4 +37,4 @@ if user_choice == 'D' or user_choice == 'd':
 elif user_choice == 'E' or user_choice == 'e':
     s = input(Fore.RED + 'Message for encryption: ')
     n = int(input(Fore.RED + 'Shift(any positive or negative integer): '))
-    print(f'{Fore.CYAN}Encrypted text: {Fore.LIGHTRED_EX}{encrypt(s, n)}')
+    print(f'{Fore.CYAN}Encrypted text3: {Fore.LIGHTRED_EX}{encrypt(s, n)}')
